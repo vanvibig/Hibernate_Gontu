@@ -12,15 +12,18 @@ import org.hibernate.cfg.Configuration;
 
 public class Main {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 
-		Student student = new Student();
-		student.setStudent_name("KV");
+		StudentAddress studentAddress = new StudentAddress();
+		studentAddress.setAddress_detail("Cantho, Vietnam");
 
-		StudentDetail studentDetail = new StudentDetail();
-		studentDetail.setStudent_mobile_number("09xxxxx0009");
-		studentDetail.setStudent(student);
+		Student student1 = new Student();
+		student1.setStudent_name("KV1");
+		student1.setStudentAddress(studentAddress);
 
+		Student student2 = new Student();
+		student2.setStudent_name("KV2");
+		student2.setStudentAddress(studentAddress);
 
 		SessionFactory sessionFactory = new Configuration()
 				.configure()
@@ -29,10 +32,12 @@ public class Main {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 
-		session.save(studentDetail);
+		session.save(student1);
+		session.save(student2);
 
 		session.getTransaction().commit();
 		session.close();
 		sessionFactory.close();
+
 	}
 }

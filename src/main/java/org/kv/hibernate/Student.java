@@ -18,6 +18,9 @@ public class Student {
 
 	private String student_name;
 
+	@ManyToOne(cascade = CascadeType.ALL)
+	private StudentAddress studentAddress;
+
 	public int getStudent_id() {
 		return student_id;
 	}
@@ -32,5 +35,13 @@ public class Student {
 
 	public void setStudent_name(String student_name) {
 		this.student_name = student_name;
+	}
+
+	public StudentAddress getStudentAddress() {
+		return studentAddress;
+	}
+
+	public void setStudentAddress(StudentAddress studentAddress) {
+		this.studentAddress = studentAddress;
 	}
 }
