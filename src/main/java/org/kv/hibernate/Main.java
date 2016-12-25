@@ -16,13 +16,13 @@ public class Main {
 
 	public static void main(String[] args) {
 
-		StudentInfo student = new StudentInfo();
-		student.setName("KV1");
-		student.setBirthDate(new Date());
+		Student student = new Student();
+		student.setStudent_name("KV");
 
-		StudentInfo student2 = new StudentInfo();
-		student2.setName("KV2");
-		student2.setBirthDate(new Date());
+		StudentDetail studentDetail = new StudentDetail();
+		studentDetail.setStudent_mobile_number("09xxxxx0009");
+		studentDetail.setStudent(student);
+
 
 		SessionFactory sessionFactory = new Configuration()
 				.configure()
@@ -31,8 +31,7 @@ public class Main {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 
-		session.save(student);
-		session.save(student2);
+		session.save(studentDetail);
 
 		session.getTransaction().commit();
 		session.close();
