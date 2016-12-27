@@ -2,6 +2,8 @@ package org.kv.hibernate;
 
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by KV on 24/12/2016.
@@ -17,8 +19,9 @@ public class Student {
 
 	private String student_name;
 
-	@ManyToOne(cascade = CascadeType.ALL)
-	private StudentAddress studentAddress;
+	@ManyToMany(cascade = CascadeType.ALL)
+	private Set<StudentCertification> studentCertifications =
+			new HashSet<StudentCertification>(0);
 
 	public int getStudent_id() {
 		return student_id;
@@ -36,11 +39,11 @@ public class Student {
 		this.student_name = student_name;
 	}
 
-	public StudentAddress getStudentAddress() {
-		return studentAddress;
+	public Set<StudentCertification> getStudentCertifications() {
+		return studentCertifications;
 	}
 
-	public void setStudentAddress(StudentAddress studentAddress) {
-		this.studentAddress = studentAddress;
+	public void setStudentCertifications(Set<StudentCertification> studentCertifications) {
+		this.studentCertifications = studentCertifications;
 	}
 }

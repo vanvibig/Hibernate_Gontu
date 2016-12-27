@@ -14,19 +14,19 @@ public class Main {
 
 	public static void main(String[] args) throws Exception {
 
-		StudentAddress studentAddress = new StudentAddress();
-		studentAddress.setAddress_detail("Cantho, Vietnam");
+		StudentCertification sc1 = new StudentCertification();
+		sc1.setCertification_name("Core Java Certificate Exam");
+
+		StudentCertification sc2 = new StudentCertification();
+		sc2.setCertification_name("Oracle DB Certificate Exam");
 
 		Student student1 = new Student();
 		student1.setStudent_name("KV1");
-		student1.setStudentAddress(studentAddress);
+		(student1.getStudentCertifications()).add(sc1);
 
 		Student student2 = new Student();
 		student2.setStudent_name("KV2");
-		student2.setStudentAddress(studentAddress);
-
-		(studentAddress.getStudents()).add(student1);
-		(studentAddress.getStudents()).add(student2);
+		(student2.getStudentCertifications()).add(sc2);
 
 		SessionFactory sessionFactory = new Configuration()
 				.configure()
@@ -35,7 +35,8 @@ public class Main {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 
-		session.save(studentAddress);
+		session.save(student1);
+		session.save(student2);
 
 		session.getTransaction().commit();
 		session.close();

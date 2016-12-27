@@ -21,7 +21,7 @@
 	  <property name="hbm2ddl.auto">create</property>
 
 	  <mapping class="org.kv.hibernate.Student"/>
-	  <mapping class="org.kv.hibernate.StudentAddress"/>
+	  <mapping class="org.kv.hibernate.StudentCertification"/>
 
 
   </session-factory>
