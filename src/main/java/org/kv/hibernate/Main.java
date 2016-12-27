@@ -14,19 +14,8 @@ public class Main {
 
 	public static void main(String[] args) throws Exception {
 
-		StudentCertification sc1 = new StudentCertification();
-		sc1.setCertification_name("Core Java Certificate Exam");
-
-		StudentCertification sc2 = new StudentCertification();
-		sc2.setCertification_name("Oracle DB Certificate Exam");
-
-		Student student1 = new Student();
-		student1.setStudent_name("KV1");
-		(student1.getStudentCertifications()).add(sc1);
-
-		Student student2 = new Student();
-		student2.setStudent_name("KV2");
-		(student2.getStudentCertifications()).add(sc2);
+		Student student = new Student();
+		student.setStudent_name("KV");
 
 		SessionFactory sessionFactory = new Configuration()
 				.configure()
@@ -35,8 +24,11 @@ public class Main {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 
-		session.save(student1);
-		session.save(student2);
+		student = (Student) session.get(Student.class, 1);
+		System.out.println("Student Object having student name as: " + student.getStudent_name());
+
+		student.setStudent_name("KV2");
+		session.delete(student);
 
 		session.getTransaction().commit();
 		session.close();
