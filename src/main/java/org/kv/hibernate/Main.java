@@ -25,6 +25,9 @@ public class Main {
 		student2.setStudent_name("KV2");
 		student2.setStudentAddress(studentAddress);
 
+		(studentAddress.getStudents()).add(student1);
+		(studentAddress.getStudents()).add(student2);
+
 		SessionFactory sessionFactory = new Configuration()
 				.configure()
 				.buildSessionFactory();
@@ -32,8 +35,7 @@ public class Main {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 
-		session.save(student1);
-		session.save(student2);
+		session.save(studentAddress);
 
 		session.getTransaction().commit();
 		session.close();

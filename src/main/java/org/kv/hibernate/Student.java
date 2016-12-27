@@ -2,7 +2,6 @@ package org.kv.hibernate;
 
 
 import javax.persistence.*;
-import java.util.Date;
 
 /**
  * Created by KV on 24/12/2016.

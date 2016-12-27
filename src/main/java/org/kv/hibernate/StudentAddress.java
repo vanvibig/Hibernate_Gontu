@@ -1,9 +1,8 @@
 package org.kv.hibernate;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by KV on 25/12/2016.
@@ -19,6 +18,9 @@ public class StudentAddress {
 
 	private String address_detail;
 
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "studentAddress")
+	private Set<Student> students = new HashSet<Student>(0);
+
 	public int getAddress_id() {
 		return address_id;
 	}
@@ -33,5 +35,13 @@ public class StudentAddress {
 
 	public void setAddress_detail(String address_detail) {
 		this.address_detail = address_detail;
+	}
+
+	public Set<Student> getStudents() {
+		return students;
+	}
+
+	public void setStudents(Set<Student> students) {
+		this.students = students;
 	}
 }
