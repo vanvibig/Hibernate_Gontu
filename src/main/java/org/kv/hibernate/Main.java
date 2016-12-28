@@ -14,9 +14,6 @@ public class Main {
 
 	public static void main(String[] args) throws Exception {
 
-		Student student = new Student();
-		student.setStudent_name("KV");
-
 		SessionFactory sessionFactory = new Configuration()
 				.configure()
 				.buildSessionFactory();
@@ -24,11 +21,11 @@ public class Main {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 
-		student.setStudent_name("KV modified before save");
+		Student student = (Student) session.get(Student.class, 1);
+		System.out.println("Student object retrieved: name = "
+				+ student.getStudent_name());
 
-		session.save(student);
-
-		student.setStudent_name("KV modified after save");
+		student.setStudent_name("KV id = 1");
 
 		session.getTransaction().commit();
 		session.close();
