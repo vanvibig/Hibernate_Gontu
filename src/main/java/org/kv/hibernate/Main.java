@@ -24,11 +24,11 @@ public class Main {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 
-		student = (Student) session.get(Student.class, 1);
-		System.out.println("Student Object having student name as: " + student.getStudent_name());
+		student.setStudent_name("KV modified before save");
 
-		student.setStudent_name("KV2");
-		session.delete(student);
+		session.save(student);
+
+		student.setStudent_name("KV modified after save");
 
 		session.getTransaction().commit();
 		session.close();
