@@ -14,6 +14,8 @@ public class Main {
 
 	public static void main(String[] args) throws Exception {
 
+		Student student = null;
+
 		SessionFactory sessionFactory = new Configuration()
 				.configure()
 				.buildSessionFactory();
@@ -21,15 +23,24 @@ public class Main {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 
-		Student student = (Student) session.get(Student.class, 1);
+		student = (Student) session.get(Student.class, 1);
 		System.out.println("Student object retrieved: name = "
 				+ student.getStudent_name());
 
-		student.setStudent_name("KV id = 1");
-
 		session.getTransaction().commit();
 		session.close();
+
+		student.setStudent_name("KV in detatch state");
+
+		Session session2 = sessionFactory.openSession();
+		session2.beginTransaction();
+
+		session2.update(student);
+		session2.getTransaction().commit();
+		session2.close();
+
 		sessionFactory.close();
+
 
 	}
 }
